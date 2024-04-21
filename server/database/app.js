@@ -58,7 +58,7 @@ app.get('/fetchReviews/dealer/:id', async (req, res) => {
 
 app.get('/fetchReviews/car/:carmake', async (req, res) => {
     try {
-      const documents = await Reviews.find({dealership: req.car_make});
+      const documents = await Reviews.find({dealership: req.params.carmake});
       res.json(documents);
     } catch (error) {
       res.status(500).json({ error: 'Error fetching documents' });
@@ -67,7 +67,7 @@ app.get('/fetchReviews/car/:carmake', async (req, res) => {
 
   app.get('/fetchReviews/car/:carmake/:model', async (req, res) => {
     try {
-      const documents = await Reviews.find({dealership: req.car_model});
+      const documents = await Reviews.find({dealership: req.params.model});
       res.json(documents);
     } catch (error) {
       res.status(500).json({ error: 'Error fetching documents' });
