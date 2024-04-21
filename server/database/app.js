@@ -56,6 +56,24 @@ app.get('/fetchReviews/dealer/:id', async (req, res) => {
   }
 });
 
+app.get('/fetchReviews/car/:carmake', async (req, res) => {
+    try {
+      const documents = await Reviews.find({dealership: req.car_make});
+      res.json(documents);
+    } catch (error) {
+      res.status(500).json({ error: 'Error fetching documents' });
+    }
+  });
+
+  app.get('/fetchReviews/car/:carmake/:model', async (req, res) => {
+    try {
+      const documents = await Reviews.find({dealership: req.car_model});
+      res.json(documents);
+    } catch (error) {
+      res.status(500).json({ error: 'Error fetching documents' });
+    }
+  });
+
 // Express route to fetch all dealerships
 app.get('/fetchDealers', async (req, res) => {
 //Write your code here
@@ -67,16 +85,17 @@ try {
   }
 });
 
+
 // Express route to fetch Dealers by a particular state
 app.get('/fetchDealers/:state', async (req, res) => {
-//Write your code here
-try {
+    //Write your code here
+    try {
     const documents = await Dealerships.find({state: req.params.state});
     res.json(documents);
-  } catch (error) {
-    res.status(500).json({ error: 'Error fetching documents' });
-  }
-});
+    } catch (err) {
+    res.status(500).json({ error: err});
+    }
+    });
 
 // Express route to fetch dealer by a particular id
 app.get('/fetchDealer/:id', async (req, res) => {
