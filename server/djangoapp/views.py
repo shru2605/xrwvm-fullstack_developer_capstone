@@ -11,6 +11,7 @@ from .restapis import get_request, analyze_review_sentiments
 
 logger = logging.getLogger(__name__)
 
+
 @csrf_exempt
 
 
@@ -34,6 +35,7 @@ def logout_request(request):
     logout(request)
     data = {"userName": ""}
     return JsonResponse(data)
+
 
 # Create a `registration` view to handle sign up request
 @csrf_exempt
