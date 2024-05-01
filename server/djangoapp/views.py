@@ -95,7 +95,7 @@ def get_dealer_reviews(request, dealer_id):
             response = analyze_review_sentiments(review_detail['review'])
             print(response)
             review_detail['sentiment'] = response['sentiment']
-            return JsonResponse({"status": 200,"reviews": reviews})
+            return JsonResponse({"status": 200, "reviews": reviews})
     else:
         return JsonResponse({"status": 400, "message": "Bad Request"})        
 
@@ -123,4 +123,4 @@ def get_cars(request):
     for car_model in car_models:
         cars.append({"CarModel": car_model.name,
                      "CarMake": car_model.car_make.name})
-    return JsonResponse({"CarModels" : cars})
+    return JsonResponse({"CarModels": cars})
