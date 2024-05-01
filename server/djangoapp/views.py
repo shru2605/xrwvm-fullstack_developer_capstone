@@ -19,7 +19,7 @@ def login_user(request):
     password = data['password']
     # Try to check if provide credential can be authenticated
     user = authenticate(username=username, password=password)
-    data = {"userName" : username}
+    data = {"userName": username}
     if user is not None:
         # If user is valid, call login method to login current user
         login(request, user)
@@ -35,8 +35,6 @@ def logout_request(request):
 
 # Create a `registration` view to handle sign up request
 @csrf_exempt
-
-
 def registration(request):
     data = json.loads(request.body)
     username = data['userName']
@@ -45,7 +43,6 @@ def registration(request):
     last_name = data['lastName']
     email = data['email']
     username_exist = False
-    email_exist = False
     try:
         # Check if user already exists
         User.objects.get(username=username)
@@ -62,7 +59,7 @@ def registration(request):
         login(request, user)
         data = {"userName": username, "status": "Authenticated"}
         return JsonResponse(data)
-    else :
+    else:
         data = {"userName": username, "error": "Already Registered"}
         return JsonResponse(data)
 
@@ -72,7 +69,7 @@ def get_dealerships(request, state="All"):
         endpoint = "/fetchDealers"
     else:
         endpoint = "/fetchDealers/" + state
-    dealerships = get_request(endpoint)
+        dealerships = get_request(endpoint)
     return JsonResponse({"status": 200, "dealers": dealerships})
 
 
@@ -94,16 +91,16 @@ def get_dealer_reviews(request, dealer_id):
             response = analyze_review_sentiments(review_detail['review'])
             print(response)
             review_detail['sentiment'] = response['sentiment']
-        return JsonResponse({"status": 200,"reviews": reviews})
+            return JsonResponse({"status": 200,"reviews": reviews})
     else:
-        return JsonResponse({"status": 400,"message": "Bad Request"})        
+        return JsonResponse({"status": 400, "message": "Bad Request"})        
 
 
 def add_review(request):
     if not request.user.is_anonymous:
         data = json.loads(request.body)
         try:
-            response = post_review(data)
+            #response = post_review(data)
             return JsonResponse({"status": 200})
         except:
             return JsonResponse({"status": 401, "message": "Error in posting review"})
@@ -121,4 +118,3 @@ def get_cars(request):
     for car_model in car_models:
         cars.append({"CarModel": car_model.name, "CarMake": car_model.car_make.name})
     return JsonResponse({"CarModels" : cars})
-    
