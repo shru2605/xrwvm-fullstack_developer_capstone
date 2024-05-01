@@ -2,7 +2,7 @@ jshint esversion: 8
 const express = require('express');
 const mongoose = require('mongoose');
 const fs = require('fs');
-const  cors = require('cors')
+const cors = require('cors')
 const app = express()
 const port = 3030;
 
@@ -117,14 +117,14 @@ app.post('/insert_review', express.raw({ type: '*/*' }), async (req, res) => {
 
   const review = new Reviews({
         "id": new_id,
-        "name": data['name'],
-        "dealership": data['dealership'],
-        "review": data['review'],
-        "purchase": data['purchase'],
-        "purchase_date": data['purchase_date'],
-        "car_make": data['car_make'],
-        "car_model": data['car_model'],
-        "car_year": data['car_year'],
+        "name": data.name,
+        "dealership": data.dealership,
+        "review": data.review,
+        "purchase": data.purchase,
+        "purchase_date": data.purchase_date,
+        "car_make": data.car_make,
+        "car_model": data.car_model,
+        "car_year": data.car_year,
     });
 
   try {
