@@ -7,7 +7,7 @@ import logging
 import json
 from django.views.decorators.csrf import csrf_exempt
 from .populate import initiate
-from .restapis import get_request, analyze_review_sentiments, post_review
+from .restapis import get_request, analyze_review_sentiments
 
 logger = logging.getLogger(__name__)
 
@@ -47,9 +47,11 @@ def registration(request):
         # Check if user already exists
         User.objects.get(username=username)
         username_exist = True
-    except:
+    # except:
         # If not, simply log this is a new user
-        logger.debug("{} is new user".format(username))
+        # logger.debug("{} is new user".format(username))
+    except Exception as e:
+        print(f"Error: {e}")
 
     # If it is a new user
     if not username_exist:
@@ -106,9 +108,11 @@ def add_review(request):
         try:
             # response = post_review(data)
             return JsonResponse({"status": 200})
-        except:
-            return JsonResponse({"status": 401,
-                      "message": "Error in posting review"})
+        # except:
+            # return JsonResponse({"status": 401,
+                      # "message": "Error in posting review"})
+        except Exception as e:
+            print(f"Error: {e}")
     else:
         return JsonResponse({"status": 403, "message": "Unauthorized"})
 
