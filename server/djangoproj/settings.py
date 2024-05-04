@@ -97,7 +97,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
         'USER': 'postgres',
-        'PASSWORD': 'NTg2MS1zaHJ1a3Vs',
+        'PASSWORD': 'MjQ0Mjgtc2hydWt1',
         'HOST': 'localhost',
         'PORT': '5432',
     }
